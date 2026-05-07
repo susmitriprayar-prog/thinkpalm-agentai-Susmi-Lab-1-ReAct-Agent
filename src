@@ -1,0 +1,48 @@
+# Minimal ReAct Agent Example for Google Colab
+
+# -----------------------------
+# TOOL DEFINITIONS
+# -----------------------------
+
+def calculator(expression):
+    """Simple calculator tool"""
+    try:
+        return eval(expression)
+    except Exception as e:
+        return f"Error: {e}"
+
+
+# -----------------------------
+# REACT AGENT
+# -----------------------------
+
+def react_agent(user_query):
+
+    print(f"\nUser Query: {user_query}\n")
+
+    # Step 1: Thought
+    print("Thought: I need to solve the math problem using the calculator tool.")
+
+    # Extract expression (simple example)
+    expression = user_query.replace("What is", "").replace("?", "").strip()
+
+    # Step 2: Action
+    print(f"Action: calculator('{expression}')")
+
+    # Step 3: Observation
+    result = calculator(expression)
+    print(f"Observation: {result}")
+
+    # Step 4: Final Answer
+    final_answer = f"The answer is {result}"
+    print(f"\nFinal Answer: {final_answer}")
+
+    return final_answer
+
+
+# -----------------------------
+# RUN AGENT
+# -----------------------------
+
+query = "What is 25 * 4 + 10?"
+react_agent(query)
